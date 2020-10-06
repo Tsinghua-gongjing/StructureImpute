@@ -17,4 +17,4 @@ pip install -r requirements.txt
 * 1. make a new directory and copy the `train.sh` script into the directory
 * 2. modify the parameters to proper value, including `--script_dir`,`--filename_train`,`--filename_validation`
 * 3. execute the script with specified GPU like `bash train.sh 2,3`
-
+* 4. the model will be saved as `prediction.pt`
