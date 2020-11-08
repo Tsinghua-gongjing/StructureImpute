@@ -15,7 +15,7 @@ Base model:  train on icSHAPE hek293 vivo?
 | FromScratch       | 0.275 | ---       | --   | --       |
 | Base+FT           | 0.460 | 0.0617411 | 8    | 00:03:45 |
 | Base+FT+DA        | 0.469 | 0.0654491 | 8    | 00:22:31 |
-| Base+FT+DA+LR5    | 0.471 | 0.0572981 | 8    | 00:20:06 |
+| Base+FT+DA+LR5    | 0.479 | 0.0561471 | 8    | 00:25:22 |
 
 ## Dataset icSHAPE hek293 ch
 
