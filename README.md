@@ -21,6 +21,6 @@ pip install -r requirements.txt
 
 ## Predict with the trained model
 
-* 1. the prediction for a fragment file can be done by running `main.py` with parameter `--load_model_and_predict`,`--loaded_pt_file`,`--filename_validation` (the other paramters *must* same as `train.sh`)
+* 1. the prediction for a fragment file can be done by running `main.py` with parameter `--load_model_and_predict`,`--loaded_pt_file`,`--filename_validation` (the other paramters **must** same as `train.sh`)
 * 2. the `test` directory includes a example `predict.sh`
 * 3. for a new icshape.out file, use the script `explore/predict_new_icshape.py` like `python predict_new_icshape.py --icshape icshape.out --predict_model dir_name_of_the_model`
