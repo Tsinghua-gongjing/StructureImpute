@@ -1,0 +1,1 @@
+/home/gongjing/project/shape_imputation/data/DMSseq_fibroblast_vivo/3.shape/shape.c200T2M0m0.out.windowsHasNull/DA/DA50.txt

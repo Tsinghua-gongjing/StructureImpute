@@ -11,6 +11,11 @@ Deep learning based imputation of RNA secondary structure profile.
 pip install -r requirements.txt
 ```
 
+## Download data
+
+```
+wget http://xxx.icloud.tsinghua.org
+```
 
 ## Train a model
 
