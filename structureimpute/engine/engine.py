@@ -60,8 +60,6 @@ class Engine(object):
                 
             if args.train_type == 'trainHasNull_lossnull':
                 output = self.model(x=seq_matrix, y=shape_matrix.reshape(-1, args.sequence_length, 1))
-                # 考虑非NULL和NULL权重，给予不同的权重
-                # 这个理设置weight=1时，和上面的trainHasNull_lossAll方式得到的结果不一样，因为nonnull和null的数据量比例是90%、10%
                 mask0 = shape_matrix_null_mask<1
                 mask1 = shape_matrix_null_mask>0
                 loss_nonnull = criterion(output[mask1], shape_true_matrix[mask1])
@@ -69,16 +67,10 @@ class Engine(object):
                 loss = loss_nonnull + args.train_loss_null_weight*loss_null
                     
             if args.train_type == 'DMSloss_all':
-                # 对于DMS，shape_matrix_null_mask包含原本没测到的-1和mask的-1，
-                # shape_true_matrix_null_mask包含原本没测到的-1
-                # 对于所有测到的都计算loss，包括mask的及不mask的
                 output = self.model(x=seq_matrix, y=shape_matrix.reshape(-1, args.sequence_length, 1))
                 mask = shape_true_matrix_null_mask>0
                 loss = criterion(output[mask], shape_true_matrix[mask])
             if args.train_type == 'DMSloss_maskonly':
-                # 对于DMS，shape_matrix_null_mask包含原本没测到的-1和mask的-1，
-                # shape_true_matrix_null_mask包含原本没测到的-1
-                # 对于所有测到的都计算loss，但是仅包括mask的碱基
                 output = self.model(x=seq_matrix, y=shape_matrix.reshape(-1, args.sequence_length, 1))
                 mask = np.logical_and((shape_true_matrix_null_mask>0).numpy(), (shape_matrix_null_mask<1).numpy())#.bool()
                 loss = criterion(output[mask], shape_true_matrix[mask])
@@ -123,7 +115,6 @@ class Engine(object):
                 shape_matrix = shape_matrix.float().to(device)
                 shape_true_matrix = shape_true_matrix.float().to(device)
                 
-                # 对全为valid shape的矩阵，+seq 送到模型进行预测
                 if args.use_decode_loss:
                     output,x_decode = self.model(seq_matrix, shape_true_matrix.reshape(-1, args.sequence_length, 1))
                 else:
@@ -148,7 +139,6 @@ class Engine(object):
                 # loss_calc = nn.MSELoss()
                 # loss_calc_out = loss_calc(output[shape_true_matrix_null_mask>0],shape_true_matrix[shape_true_matrix_null_mask>0])
                 
-                # 对全为valid shape的矩阵，预先设置一些位点为NULL，+seq 送到模型进行预测
                 if args.use_decode_loss:
                     output,x_decode = self.model(seq_matrix, shape_matrix.reshape(-1, args.sequence_length, 1))
                 else:

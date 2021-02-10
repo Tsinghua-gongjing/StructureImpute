@@ -99,11 +99,15 @@ You can directly download the pre-processed *.npz files with command lines below
 ```
 cd StructureImpute
 
-# 7.1GB
-wget -c https://cloud.tsinghua.edu.cn/f/ae696267bb284105b904/\?dl\=1 -O data_processed.tgz
-# MD5 (data.tar.gz) = e532d847e92e6426f512eb4039272043 
+# 3.9GB
+wget -c https://cloud.tsinghua.edu.cn/f/a2f50d3cf63044339600/?dl=1 -O data_processed_icSHAPE.tgz
+MD5 (data_processed_icSHAPE.tgz) = 076c52aa48cbe3b5260297225907a5be
 
-tar zxvf data_processed.tgz
+# 3.6GB
+wget -c https://cloud.tsinghua.edu.cn/f/32dc9c895d6748479976/?dl=1 -O data_processed_DMSseq.tgz
+# MD5 (data_processed_DMSseq.tgz) = 87133f4c51bc968a62710987b8f4df3a
+
+tar zxvf data_processed_icSHAPE.tgz data_processed_DMSseq.tgz
 ```
 
 ## Instructions
