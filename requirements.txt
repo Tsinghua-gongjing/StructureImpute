@@ -5,5 +5,4 @@ pyfasta
 matplotlib
 seaborn
 sklearn
-torch
 termcolor
