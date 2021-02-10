@@ -2,7 +2,7 @@
 import numpy as np
 import argparse
 
-from structureimpute.engine import util
+from structureimpute.utils import util
 
 
 
