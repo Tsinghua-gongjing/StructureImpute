@@ -1,3 +1,4 @@
+torch
 tensorboardX
 nested_dict
 pyfasta

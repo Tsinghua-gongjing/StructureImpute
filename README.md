@@ -12,12 +12,12 @@ Deep learning based imputation of RNA secondary structure profile.
 ### Requirements
 
 * torch>=1.1.0
-* tensorboardX
-* nested_dict
-* pyfasta
-* matplotlib
-* seaborn
-* sklearn
+* tensorboardX>=1.8
+* nested_dict>=1.61
+* pyfasta>=0.5.2
+* matplotlib>=2.2.2
+* seaborn>=0.9.0
+* scikit-learn>=0.21.2
 
 First clone the repository
 
@@ -76,8 +76,14 @@ tar zxvf data.tar.gz
 
 Data augmentation
 ```
-# cmd for data augmentation
+# generate NULL pattern file of shape.txt
+# a /path/to/train.null_pattern.txt will be created
+python data_shape_distribution.py --data /path/to/train.txt
 
+# cmd for data augmentation
+python generate_train_DA.py --txt /path/to/train.null_pattern.txt \
+	--strategy shadow_null_shuffle \
+	--times 50
 ```
 
 ### Generate NPZ files
