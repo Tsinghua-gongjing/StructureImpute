@@ -301,7 +301,7 @@ def main():
     print("Write prediction: epoch:{}, loss:{}".format(min_epoch, min_loss))
     
     # saving model
-    torch.save(best_model.state_dict(), args.filename_prediction.replace('.txt', '.pt'))
+    torch.save(best_model.state_dict(), 'model.pt'))
         
 if __name__ == '__main__':
     main()
