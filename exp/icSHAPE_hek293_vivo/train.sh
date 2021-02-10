@@ -19,5 +19,3 @@ python -u tools/main.py \
     --filename_prediction $outdir/prediction.txt \
     --logdir $outdir/tfb \
     |tee $outdir/log.txt
-
-srun -p Test $work_space/eval.sh 

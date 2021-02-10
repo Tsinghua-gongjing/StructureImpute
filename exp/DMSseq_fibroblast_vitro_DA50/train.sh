@@ -17,6 +17,5 @@ python -u tools/main.py \
     --filename_train data/processed/${name}.train \
     --filename_validation data/processed/${name}.val \
     --filename_prediction $outdir/prediction.txt \
+    --logdir $outdir/tfb \
     |tee -a $outdir/log.txt
-
-srun -p Test $work_space/eval.sh |tee -a $outdir/log.txt 

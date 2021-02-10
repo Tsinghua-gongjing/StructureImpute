@@ -5,17 +5,10 @@ if [ ! -d $outdir ] ;then
     mkdir $outdir
 fi
 # time CUDA_VISIBLE_DEVICES=$1 
-part=$1
-n=$2
 name=$(basename $work_space)
-srun --mpi=pmi2 --gres=gpu:${n} \
-    -p $part -n1 \
-    --ntasks-per-node=1 \
-    -J test -K \
-    python -u tools/main.py \
-    --load_model_and_continue_train \
-    --loaded_pt_file data/xk/prediction.pt \
-    --arch AllFusionNetMultiply \
+python -u tools/main.py \
+    --finetune \
+    --load_model data/pretrained.pt \
     --batch_size 800 \
     --test_batch_size 720 \
     --lr 0.00001 \
@@ -24,6 +17,5 @@ srun --mpi=pmi2 --gres=gpu:${n} \
     --filename_train data/processed/${name}.train \
     --filename_validation data/processed/${name}.val \
     --filename_prediction $outdir/prediction.txt \
+    --logdir $outdir/tfb \
     |tee -a $outdir/log.txt
-
-srun -p Test $work_space/eval.sh |tee -a $outdir/log.txt 
