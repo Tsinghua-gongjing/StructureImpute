@@ -39,7 +39,7 @@ pip install -e .
 ### Download pre-processed training set
 
 
-You can directly download the pre-processed training set (data_processed_icSHAPE.tgz and data_processed_DMSseq.npz files) from [figshare](https://doi.org/10.6084/m9.figshare.16606850) or another cloud source:
+You can directly download the pre-processed training set (data_processed_icSHAPE.tgz and data_processed_DMSseq.npz files) from [figshare](https://doi.org/10.6084/m9.figshare.16606850) or Tsinghua cloud:
 
 ```
 cd StructureImpute
@@ -58,6 +58,11 @@ tar zxvf data_processed_icSHAPE.tgz data_processed_DMSseq.tgz
 The pre-processing pipeline is [data/README.md](data/README.md).
 
 ## Instructions
+
+
+### Download meta model
+
+You can directly download the pre-trained meta model (model_icSHAPE.pt and model_DMSseq.pt files) from [figshare](https://doi.org/10.6084/m9.figshare.16606850)
 
 ### Train a model
 
@@ -87,7 +92,7 @@ Output files will be saved under the directory
 
 ### Impute with the trained model
 
-1. the prediction for a fragment file (e.g., data/structure\_score/hek\_wc\_vivo/validation.txt) can be done by running `tools/main.py` with parameter `--predict` and `--filename_prediction`
+1. the prediction for a fragment file (e.g., data/structure_score/icSHAPE_hek_vivo.val) can be done by running `tools/main.py` with parameter `--predict` and `--filename_prediction`
 
 ```
 python tools/main.py \
