@@ -35,6 +35,18 @@ pip install -e .
 
 ## Datasets
 
+You can also downloaded all the data sets from [figshare](https://doi.org/10.6084/m9.figshare.16606850) or another cloud source:
+
+```
+# 3.1GB
+wget -c https://cloud.tsinghua.edu.cn/f/c4a768fca5f64b02b1c2/?dl=1 -O data.tar.gz
+# MD5 (data.tar.gz) = e532d847e92e6426f512eb4039272043 
+
+
+cd StructureImpute
+tar zxvf data.tar.gz
+```
+
 The data used in the study are under `data` directory, including:
 
 * structure\_score: structural score of training/validation data set across different conditions
@@ -42,7 +54,7 @@ The data used in the study are under `data` directory, including:
 * RBMbase: structural score around m6A modification sites
 * start\_stop\_codon: structural score around start/stop condon 
 
-The processed training and validation structural core data set can be found under `./data/structure_score` directory, including:
+The processed training and validation structural core data set can be found under `data/structure_score` directory, including:
 
 icSHAPE data:
 
@@ -59,20 +71,6 @@ DMS-seq data:
 * DMSseq\_fibroblast\_vivo: fibroblast cell line of *in vivo* whole cell
 * DMSseq\_fibroblast\_vivo: fibroblast cell line of *in vitro* whole cell
 
-You can also downloaded all the data sets from another cloud source:
-
-```
-# 3.1GB
-wget -c https://cloud.tsinghua.edu.cn/f/c4a768fca5f64b02b1c2/?dl=1 -O data.tar.gz
-# MD5 (data.tar.gz) = e532d847e92e6426f512eb4039272043 
-```
-
-### Pre-process
-
-```
-cd StructureImpute
-tar zxvf data.tar.gz
-```
 
 Data augmentation
 ```
@@ -169,4 +167,8 @@ exp/DMSseq_K562_vivo/train.sh
 ## Copyright and License
 
 This project is free to use for non-commercial purposes - see the [LICENSE](https://github.com/Tsinghua-gongjing/StructureImpute/blob/master/LICENSE) file for details.
+
+## Reference
+
+Gong, Jing; Xu, Kui; Zhang, Qiangfeng Cliff (2021): A deep learning method for recovering missing signals in transcriptome-wide RNA structure profiles from probing experiments. figshare. Dataset. https://doi.org/10.6084/m9.figshare.16606850
 
