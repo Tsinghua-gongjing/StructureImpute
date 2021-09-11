@@ -35,64 +35,11 @@ pip install -e .
 
 ## Datasets
 
-You can also downloaded all the data sets from [figshare](https://doi.org/10.6084/m9.figshare.16606850) or another cloud source:
 
-```
-# 3.1GB
-wget -c https://cloud.tsinghua.edu.cn/f/c4a768fca5f64b02b1c2/?dl=1 -O data.tar.gz
-# MD5 (data.tar.gz) = e532d847e92e6426f512eb4039272043 
+### Download pre-processed training set
 
 
-cd StructureImpute
-tar zxvf data.tar.gz
-```
-
-The data used in the study are under `data` directory, including:
-
-* structure\_score: structural score of training/validation data set across different conditions
-* CLIPDB: structural score around FXR2 binding sites
-* RBMbase: structural score around m6A modification sites
-* start\_stop\_codon: structural score around start/stop condon 
-
-The processed training and validation structural core data set can be found under `data/structure_score` directory, including:
-
-icSHAPE data:
-
-* hek\_wc\_vivo: HEK293 cell line of *in vivo* whole cell condition
-* hek\_wc\_vitro: HEK293 cell line of *in vitro* whole cell condition
-* hek\_ch\_vivo: HEK293 cell line of *in vivo* chromatin-associated component
-* hek\_cy\_vivo: HEK293 cell line of *in vivo* cytoplasmic component
-* hek\_np\_vivo: HEK293 cell line of *in vivo* nucleoplasmic component
-
-DMS-seq data:
-
-* DMSseq\_K562\_vivo: K562 cell line of *in vivo* whole cell
-* DMSseq\_K562\_vitro: K562 cell line of *in vitro* whole cell
-* DMSseq\_fibroblast\_vivo: fibroblast cell line of *in vivo* whole cell
-* DMSseq\_fibroblast\_vivo: fibroblast cell line of *in vitro* whole cell
-
-
-Data augmentation
-```
-# generate NULL pattern file of shape.txt
-# a /path/to/train.null_pattern.txt will be created
-python data_shape_distribution.py --data /path/to/train.txt
-
-# cmd for data augmentation
-python generate_train_DA.py --txt /path/to/train.null_pattern.txt \
-	--strategy shadow_null_shuffle \
-	--times 50
-```
-
-### Generate NPZ files
-
-```
-python structureimpute/dataset/generate_data.py \
-    --filename_train data/icSHAPE_mes_vivo/icSHAPE_mes_vivo.train \
-    --sequence_length 100 \
-```
-
-You can directly download the pre-processed *.npz files with command lines below:
+You can directly download the pre-processed training set (data_processed_icSHAPE.tgz and data_processed_DMSseq.npz files) from [figshare](https://doi.org/10.6084/m9.figshare.16606850) or another cloud source:
 
 ```
 cd StructureImpute
@@ -107,6 +54,8 @@ wget -c https://cloud.tsinghua.edu.cn/f/32dc9c895d6748479976/?dl=1 -O data_proce
 
 tar zxvf data_processed_icSHAPE.tgz data_processed_DMSseq.tgz
 ```
+
+The pre-processing pipeline is [data/README.md](data/README.md).
 
 ## Instructions
 
