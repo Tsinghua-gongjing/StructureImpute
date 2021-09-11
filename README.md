@@ -1,4 +1,6 @@
 # StructureImpute
+[![DOI](https://zenodo.org/badge/301282001.svg)](https://zenodo.org/badge/latestdoi/301282001)
+
 Deep learning based imputation of RNA secondary structure profile.
 
 ##  Architecture of StructureImpute model
