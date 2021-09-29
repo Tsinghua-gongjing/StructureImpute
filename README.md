@@ -64,7 +64,7 @@ The pre-processing pipeline is [data/README.md](data/README.md).
 
 ### Download meta model
 
-You can directly download the pre-trained meta model (model_icSHAPE.pt and model_DMSseq.pt files) from [figshare](https://doi.org/10.6084/m9.figshare.16606850)
+You can directly download the pre-trained meta model (meta_model.pt files) from [figshare](https://doi.org/10.6084/m9.figshare.16698109.v1)
 
 ### Train a model
 
