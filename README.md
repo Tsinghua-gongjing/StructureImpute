@@ -126,5 +126,8 @@ This project is free to use for non-commercial purposes - see the [LICENSE](http
 
 ## Reference
 
+Gong, Jing#; Xu, Kui#; Ma, Ziyuan; Lu, Zhi John; Zhang, Qiangfeng Cliff* (2021). A deep learning method for recovering missing signals in transcriptome-wide RNA structure profiles from probing experiments. *Nature Machine Intelligence* 3, 995–1006 (2021). https://doi.org/10.1038/s42256-021-00412-0 
+
+
 Gong, Jing; Xu, Kui; Zhang, Qiangfeng Cliff (2021): A deep learning method for recovering missing signals in transcriptome-wide RNA structure profiles from probing experiments. figshare. Dataset. https://doi.org/10.6084/m9.figshare.16606850
 
