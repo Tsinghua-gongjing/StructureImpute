@@ -97,6 +97,10 @@ Output files will be saved under the directory
 1. the prediction for a fragment file (e.g., data/structure_score/icSHAPE_hek_vivo.val) can be done by running `tools/main.py` with parameter `--predict` and `--filename_prediction`
 
 ```
+# prepare a .npz file for the fragment file
+# /path/to/fragment/file/will/be/imputed.txt.npz will be generated
+python structureimpute/dataset/generate_data.py --filename_train /path/to/fragment/file/will/be/imputed.txt --sequence_length 100
+
 python tools/main.py \
     --predict \
     --load_model /path/to/output/dir/prediction.pt \
@@ -106,9 +110,8 @@ python tools/main.py \
 
 2. for a new icshape.out file, use the script `structureimpute/explore/predict_new_icshape.py`. A new directory `/path/to/new/icshape.out.predict` will be created and save all the bootstrapping results:
 
-```
-python structureimpute/explore/predict_new_icshape.py --icshape /path/to/new/icshape.out \
-	--predict_model /path/to/output/dir/prediction.pt
+```    
+python structureimpute/explore/predict_new_icshape.py --icshape /path/to/new/icshape.out --species_fa /path/to/the/reference.fa --predict_model /path/to/output/dir/prediction.pt
 ```
 
 ### Fine-tune on DMSseq data
