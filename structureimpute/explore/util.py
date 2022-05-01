@@ -99,6 +99,8 @@ def read_fa(fa=None, species='human', pureID=1):
             fa = '/home/gongjing/project/shape_imputation/data/mammalian/transcriptome.fa'
         if species == 'mouse_yubo':
             fa = '/home/gongjing/project/shape_imputation/data/mammalian/mouse_transcriptome.fa'
+        if species == 'zebrafish':
+            fa = '/root/StructureImpute/data/danRer10.refSeq.transcriptome.fa'
     fa_dict1 = Fasta(fa, key_fn=lambda key:key.split("\t")[0])
     if pureID:
         fa_dict = {i.split()[0].split('.')[0]:j[0:] for i,j in fa_dict1.items()}

@@ -1,0 +1,18 @@
+Metadata-Version: 1.2
+Name: StructureImpute
+Version: 0.1.1
+Summary: StructureImpute
+Home-page: https://github.com/Tsinghua-gongjing/StructureImpute
+Author: Jing Gong
+Author-email: gong15@tsinghua.org
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 1 - Beta
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: CentOS :: Linux
+Requires-Python: >3.6.0

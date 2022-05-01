@@ -21,9 +21,9 @@ import util
 import argparse
 import plot_two_shape_common_tx_pct
 
-def complete_shape_out(icshape=None, species='human', predict_label=None, predict_model=None, pct=0.5, window_len=100, sliding=50, output_dir=None, gpu_id=1):
+def complete_shape_out(icshape=None, species_fa=None, species='human', predict_label=None, predict_model=None, pct=0.5, window_len=100, sliding=50, output_dir=None, gpu_id=1):
     if not os.path.isdir(output_dir): os.mkdir(output_dir)
-    fa_dict = util.read_fa(fa=None, species=species, pureID=1)
+    fa_dict = util.read_fa(fa=species_fa, species=species, pureID=1)
     
     icshape_fragment_all = output_dir+'/'+'allfragment.txt'
     icshape_fragment_all2 = icshape_fragment_all+'2'
@@ -40,11 +40,12 @@ def complete_shape_out(icshape=None, species='human', predict_label=None, predic
     subprocess.call([cmd], shell=True)
     
     predict = output_dir+'/'+'predict.txt'
-    cmd_predict = 'bash predict_new_icshape.sh {} {} {} {}'.format(gpu_id, icshape_fragment_pct2, predict, predict_model)
+    cmd_predict = 'bash structureimpute/explore/predict_new_icshape.sh {} {} {} {}'.format(gpu_id, icshape_fragment_pct2, predict, predict_model)
+    print(cmd_predict)
     subprocess.call([cmd_predict], shell=True)
     # predict = '/home/gongjing/project/shape_imputation/exper/{}/prediction.{}.txt'.format(predict_model, predict_label)
     
-    predict_shape_out = predict.replace('.txt', '.out')
+    predict_shape_out = predict.replace('predict.txt', 'predict.out')
     util.predict_to_shape(validation=icshape_fragment_pct2, predict=predict, shape_out=predict_shape_out)
     
     # 从总的fragment减去小于pct的，得到剩余的不用预测的大于pct的fragment
@@ -77,18 +78,18 @@ def complete_shape_out(icshape=None, species='human', predict_label=None, predic
     
     return icshape_fragment_pct_plus_exceed_predict_shapeout,stat1,stat2
 
-def complete_shape_out_nullpct(icshape, species, predict_label, predict_model, pct, window_len, sliding, shape_null_pct, gpu_id):
+def complete_shape_out_nullpct(icshape, species_fa, species, predict_label, predict_model, pct, window_len, sliding, shape_null_pct, gpu_id):
     icshape_predict_dir = icshape+'.predict'
     if not os.path.isdir(icshape_predict_dir): os.mkdir(icshape_predict_dir)
         
     stat_iteration = nested_dict(2, list)
     
     n = 1
-    new_shapeout,stat1,stat2 = complete_shape_out(icshape, species, predict_label, predict_model, pct, window_len, sliding, output_dir=icshape_predict_dir+'/iteration'+str(n), gpu_id=gpu_id)
+    new_shapeout,stat1,stat2 = complete_shape_out(icshape, species_fa, species, predict_label, predict_model, pct, window_len, sliding, output_dir=icshape_predict_dir+'/iteration'+str(n), gpu_id=gpu_id)
     stat_iteration[0] = stat1; stat_iteration[1] = stat2
     while stat2['total_bases(NULL_pct)'] >= shape_null_pct:
         n += 1
-        new_shapeout,stat1,stat2 = complete_shape_out(new_shapeout, species, predict_label, predict_model, pct, window_len, sliding, output_dir=icshape_predict_dir+'/iteration'+str(n), gpu_id=gpu_id)
+        new_shapeout,stat1,stat2 = complete_shape_out(new_shapeout, species_fa, species, predict_label, predict_model, pct, window_len, sliding, output_dir=icshape_predict_dir+'/iteration'+str(n), gpu_id=gpu_id)
         stat_iteration[n] = stat2
     stat_df = pd.DataFrame.from_dict(stat_iteration, orient='columns')
     print(stat_df)
@@ -101,19 +102,20 @@ def main():
     parser = argparse.ArgumentParser(description='Complete a input shape.out')
     
     parser.add_argument('--icshape', type=str, default='/home/gongjing/project/shape_imputation/data/hek_wc_vivo/3.shape/shape.c200T2M0m0.out', help='icSHAPE out file')
+    parser.add_argument('--species_fa', type=str, default=None, help='Species .fa reference file')
     parser.add_argument('--species', type=str, default='human', help='Species')
     parser.add_argument('--predict_label', type=str, default='wc_all_fragment', help='Predict_label')
-    parser.add_argument('--predict_model', type=str, default='b28_trainLossall_GmultiplyX_randomNperfragmentpct0.3L20x10_randomNperValidate2', help='Model used to predict')
+    parser.add_argument('--predict_model', type=str, default='/root/StructureImpute/data/meta_model.pt', help='Model used to predict')
     parser.add_argument('--pct', type=float, default=0.5, help='Max NULL percentage in fragment to predict')
     parser.add_argument('--window_len', type=int, default=100, help='window_len')
     parser.add_argument('--sliding', type=int, default=10, help='sliding')
     parser.add_argument('--shape_null_pct', type=float, default=0.3, help='Stop predict when remains pct(NULL) <= cutoff')
-    parser.add_argument('--gpu_id', type=str, default="1", help='GPU id')
+    parser.add_argument('--gpu_id', type=str, default="0", help='GPU id')
     
     # get args
     args = parser.parse_args()
     util.print_args('Complete a input shape.out', args)
-    complete_shape_out_nullpct(icshape=args.icshape, species=args.species, predict_label=args.predict_label, predict_model=args.predict_model, pct=args.pct, window_len=args.window_len, sliding=args.sliding, shape_null_pct=args.shape_null_pct, gpu_id=args.gpu_id)
+    complete_shape_out_nullpct(icshape=args.icshape, species_fa=args.species_fa, species=args.species, predict_label=args.predict_label, predict_model=args.predict_model, pct=args.pct, window_len=args.window_len, sliding=args.sliding, shape_null_pct=args.shape_null_pct, gpu_id=args.gpu_id)
     
     # new_shapeout = complete_shape_out(icshape=args.icshape, species=args.species, predict_label=args.predict_label, predict_model=args.predict_model, pct=args.pct, window_len=args.window_len, sliding=args.sliding)
     # for i in range(10):

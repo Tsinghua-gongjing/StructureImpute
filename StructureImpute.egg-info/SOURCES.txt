@@ -1,0 +1,7 @@
+README.md
+setup.py
+StructureImpute.egg-info/PKG-INFO
+StructureImpute.egg-info/SOURCES.txt
+StructureImpute.egg-info/dependency_links.txt
+StructureImpute.egg-info/requires.txt
+StructureImpute.egg-info/top_level.txt

@@ -835,7 +835,7 @@ def encode_rna(seq, feature_size=4):
         print('feature_size({}) not define'.format(feature_size))
         sys.exit()
     seq_feature = np.zeros((len(seq), feature_size))
-    for n,i in enumerate(seq):
+    for n,i in enumerate(seq.upper()):
         seq_feature[n,] = d[i]
     return seq_feature
 
