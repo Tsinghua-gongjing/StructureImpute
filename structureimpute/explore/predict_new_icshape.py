@@ -74,7 +74,7 @@ def complete_shape_out(icshape=None, species_fa=None, species='human', predict_l
     
     # 画真实和预测的null pct scatter
     savefn = icshape_fragment_pct_plus_exceed_predict_shapeout+'.scatter.pdf'
-    stat1,stat2 = plot_two_shape_common_tx_pct.plot_shape_tx_null_pct(out1=icshape, out2=icshape_fragment_pct_plus_exceed_predict_shapeout, out1_label='True', out2_label='Predict', savefn=savefn, species=species)
+    stat1,stat2 = plot_two_shape_common_tx_pct.plot_shape_tx_null_pct(out1=icshape, out2=icshape_fragment_pct_plus_exceed_predict_shapeout, out1_label='True', out2_label='Predict', savefn=savefn, species_fa=species_fa, species=species)
     
     return icshape_fragment_pct_plus_exceed_predict_shapeout,stat1,stat2
 

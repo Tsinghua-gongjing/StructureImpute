@@ -20,7 +20,7 @@ from termcolor import colored
 import util
 import argparse
 
-def plot_shape_tx_null_pct(out1=None, out2=None, out1_label='True', out2_label='Predict', savefn=None, species='human'):
+def plot_shape_tx_null_pct(out1=None, out2=None, out1_label='True', out2_label='Predict', savefn=None, species_fa=None, species='human'):
     out_dict1 = util.read_icshape_out(out1)
     out_dict2 = util.read_icshape_out(out2)
     tx_common = set(out_dict1.keys()) & set(out_dict2.keys())
@@ -35,7 +35,7 @@ def plot_shape_tx_null_pct(out1=None, out2=None, out1_label='True', out2_label='
     print('{}: n={}'.format(out2, len(out_dict2)))
     print('common tx: n={}'.format(len(tx_common)))
     
-    fa_dict = util.read_fa(fa=None, species=species, pureID=1)
+    fa_dict = util.read_fa(fa=species_fa, species=species, pureID=1)
     stat1 = util.shape_dict_stat(out_dict1, fa_dict, None, RNA_type=None, trim5Len=5, trim3Len=30)
     stat2 = util.shape_dict_stat(out_dict2, fa_dict, None, RNA_type=None, trim5Len=5, trim3Len=30)
     print(pd.DataFrame.from_dict(stat1,orient='index'), pd.DataFrame.from_dict(stat2, orient='index'))
@@ -62,12 +62,13 @@ def main():
     parser.add_argument('--out1_label', type=str, default='True', help='icSHAPE out file1 label')
     parser.add_argument('--out2_label', type=str, default='Predict', help='icSHAPE out file2 label')
     parser.add_argument('--savefn', type=str, default='/home/gongjing/project/shape_imputation/data/hek_wc_vivo/3.shape/shape.c200T2M0m0.allfragment.0.5+exceed0.5.txt2.predict.out.scatter.pdf', help='Save plot file')
+    parser.add_argument('--species_fa', type=str, default=None, help='Species .fa reference file')
     parser.add_argument('--species', type=str, default='human', help='Species')
     
     # get args
     args = parser.parse_args()
     util.print_args('Plot null pct scatter of common tx between two icshape.out', args)
-    plot_shape_tx_null_pct(out1=args.icshape1, out2=args.icshape2, out1_label=args.out1_label, out2_label=args.out2_label, savefn=args.savefn, species=args.species)
+    plot_shape_tx_null_pct(out1=args.icshape1, out2=args.icshape2, out1_label=args.out1_label, out2_label=args.out2_label, savefn=args.savefn, species_fa=args.species_fa, species=args.species)
     
 
 if __name__ == '__main__':
